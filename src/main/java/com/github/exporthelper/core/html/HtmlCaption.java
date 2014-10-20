@@ -5,7 +5,6 @@ public class HtmlCaption extends HtmlTagWithContent {
 	private String title;
 	
 	public HtmlCaption(){
-		tag = "caption";
 	}
 
 	public String getTitle(){
@@ -16,10 +15,4 @@ public class HtmlCaption extends HtmlTagWithContent {
 		this.title = title;
 	}
 
-	@Override
-	protected StringBuilder getHtmlAttributes() {
-		StringBuilder html = super.getHtmlAttributes();
-		html.append(writeAttribute("title", this.title));
-		return html;
-	}
 }

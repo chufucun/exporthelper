@@ -35,16 +35,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.github.exporthelper.core.ReservedFormat;
-import com.github.exporthelper.core.util.CollectionUtils;
-
 /**
  * Plain old HTML <code>tr</code> tag.
  * 
  * @author Thibault Duchateau
  * @since 0.1.0
  */
-public class HtmlRow extends HtmlTag {
+public class HtmlRow {
 
 	/**
 	 * List of columns (<code>td</code> tag) inside the row (<code>tr</code>
@@ -53,36 +50,12 @@ public class HtmlRow extends HtmlTag {
 	private List<HtmlColumn> columns = new LinkedList<HtmlColumn>();
 
 	public HtmlRow() {
-		this.tag = "tr";
 	}
 
 	public HtmlRow(String id) {
-		this.tag = "tr";
-		this.id = id;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public StringBuilder toHtml() {
-		StringBuilder html = new StringBuilder();
-		html.append(getHtmlOpeningTag());
-		html.append(getHtmlColumns());
-		html.append(getHtmlClosingTag());
-		return html;
-	}
 	
-	private StringBuilder getHtmlColumns() {
-		StringBuilder html = new StringBuilder();
-		for (HtmlColumn column : this.columns) {
-			if (CollectionUtils.containsAny(column.getEnabledDisplayTypes(), ReservedFormat.ALL, ReservedFormat.HTML)) {
-				html.append(column.toHtml());
-			}
-		}
-		return html;
-	}
-
 	/**
 	 * <p>
 	 * Returns a filtered list of {@link HtmlColumn} for this current

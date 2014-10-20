@@ -46,7 +46,7 @@ import com.github.exporthelper.core.configuration.ConfigToken;
  * @author Thibault Duchateau
  * @since 0.1.0
  */
-public class HtmlTable extends HtmlTag {
+public class HtmlTable {
 
 	// Internal attributes
 	private String originalId;
@@ -62,76 +62,7 @@ public class HtmlTable extends HtmlTag {
 	//	private TableConfiguration tableConfiguration;
 
 	public HtmlTable(String id, HttpServletRequest request, HttpServletResponse response) {
-		this(id, request, response, null);
-	}
-
-
-	public HtmlTable(String id, HttpServletRequest request,
-			HttpServletResponse response, Map<String, String> dynamicAttributes) {
-		this.tag = "table";
 		this.originalId = id;
-		this.id = processId(id);
-		this.dynamicAttributes = dynamicAttributes;
-		//		this.tableConfiguration = TableConfiguration.getInstance(id, request, groupName);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public StringBuilder toHtml() {
-		StringBuilder html = new StringBuilder();
-		html.append(getHtmlOpeningTag());
-		html.append(getHtmlHeader());
-		html.append(getHtmlBody());
-		html.append(getHtmlFooter());
-		html.append(getHtmlClosingTag());
-		return html;
-	}
-
-	private StringBuilder getHtmlHeader() {
-		StringBuilder html = new StringBuilder();
-		if (this.caption != null) {
-			html.append(this.caption.toHtml());
-		}
-		html.append("<thead>");
-		for (HtmlRow row : this.head) {
-			html.append(row.toHtml());
-		}
-		html.append("</thead>");
-		return html;
-	}
-
-	private StringBuilder getHtmlBody() {
-		StringBuilder html = new StringBuilder();
-		html.append("<tbody>");
-		for (HtmlRow row : this.body) {
-			html.append(row.toHtml());
-		}
-		html.append("</tbody>");
-		return html;
-	}
-
-	private StringBuilder getHtmlFooter() {
-		StringBuilder html = new StringBuilder();
-		if (!this.foot.isEmpty()) {
-			html.append("<tfoot>");
-			for (HtmlRow row : this.foot) {
-				html.append(row.toHtml());
-			}
-
-			html.append("</tfoot>");
-		}
-		return html;
-	}
-
-	@Override
-	protected StringBuilder getHtmlAttributes() {
-		StringBuilder html = new StringBuilder();
-		html.append(writeAttribute("id", this.id));
-		//		html.append(writeAttribute("class", TableConfig.CSS_CLASS.valueFrom(this.tableConfiguration)));
-		//		html.append(writeAttribute("style", TableConfig.CSS_STYLE.valueFrom(this.tableConfiguration)));
-		return html;
 	}
 
 	public HtmlCaption getCaption() {

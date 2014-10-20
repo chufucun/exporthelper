@@ -34,26 +34,12 @@ package com.github.exporthelper.core.html;
  * 
  * @author Gautier Dhordain
  */
-public abstract class HtmlTagWithContent extends HtmlTag {
+public abstract class HtmlTagWithContent {
 
 	/**
 	 * Content of the tag.
 	 */
 	protected StringBuilder content = new StringBuilder();
-
-	/**
-	 * Render the tag in HTML code.
-	 * 
-	 * @return the HTML code corresponding to the tag.
-	 */
-	@Override
-	public StringBuilder toHtml() {
-		StringBuilder html = new StringBuilder();
-		html.append(getHtmlOpeningTag());
-		html.append(this.content);
-		html.append(getHtmlClosingTag());
-		return html;
-	}
 
 	public StringBuilder getContent() {
 		return content;

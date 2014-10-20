@@ -33,10 +33,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.github.exporthelper.core.ReservedFormat;
-import com.github.exporthelper.core.configuration.ColumnConfig;
 import org.apache.commons.lang3.StringUtils;
 
+import com.github.exporthelper.core.ReservedFormat;
 import com.github.exporthelper.core.configuration.ColumnConfiguration;
 
 /**
@@ -91,7 +90,6 @@ public class HtmlColumn extends HtmlTagWithContent {
 		if (content != null) {
 			setContent(new StringBuilder(content));
 		}
-		this.dynamicAttributes = dynamicAttributes;
 	}
 
 	public HtmlColumn(Boolean isHeader, String content, Map<String, String> dynamicAttributes, String displayTypes) {
@@ -102,7 +100,6 @@ public class HtmlColumn extends HtmlTagWithContent {
 		if (content != null) {
 			setContent(new StringBuilder(content));
 		}
-		this.dynamicAttributes = dynamicAttributes;
 		if (StringUtils.isNotBlank(displayTypes)) {
 			String[] displayTypesTab = displayTypes.trim().split(",");
 			for (String displayType : displayTypesTab) {
@@ -114,31 +111,8 @@ public class HtmlColumn extends HtmlTagWithContent {
 		}
 	}
 	
-	@Override
-	protected StringBuilder getHtmlAttributes() {
-		StringBuilder html = new StringBuilder();
-		if (this.isHeaderColumn) {
-			//			html.append(writeAttribute("class", ColumnConfig.CSSCLASS.valueFrom(this.getColumnConfiguration())));
-			//			html.append(writeAttribute("style", ColumnConfig.CSSSTYLE.valueFrom(this.getColumnConfiguration())));
-			//			
-			String columnId = ColumnConfig.ID.valueFrom(this.getColumnConfiguration());
-			if (StringUtils.isNotBlank(columnId)) {
-				html.append(writeAttribute("id", columnId));
-			}
-		} else {
-			html.append(writeAttribute("class", this.cssCellClass));
-			html.append(writeAttribute("style", this.cssCellStyle));
-		}
-		return html;
-	}
-
 	private void setHeaderColumn(Boolean isHeaderColumn) {
 		this.isHeaderColumn = isHeaderColumn;
-		if (this.isHeaderColumn) {
-			this.tag = "th";
-		} else {
-			this.tag = "td";
-		}
 	}
 
 	public Boolean isHeaderColumn() {
@@ -153,44 +127,6 @@ public class HtmlColumn extends HtmlTagWithContent {
 		this.columnConfiguration = columnConfiguration;
 	}
 	
-	//	@Override
-	//	public void addCssClass(String cssClass) {
-	//		if (this.isHeaderColumn) {
-	//			StringBuilder cssClassSb = ColumnConfig.CSSCLASS.valueFrom(this.columnConfiguration);
-	//			if (cssClassSb != null && cssClassSb.length() != 0) {
-	//				ColumnConfig.CSSCLASS.appendIn(this.columnConfiguration, CLASS_SEPARATOR);
-	//			}
-	//			ColumnConfig.CSSCLASS.appendIn(this.columnConfiguration, cssClass);
-	//		}
-	//		else {
-	//			if (this.cssClass == null) {
-	//				this.cssClass = new StringBuilder();
-	//			}
-	//			else {
-	//				this.cssClass.append(CLASS_SEPARATOR);
-	//			}
-	//			this.cssClass.append(cssClass);
-	//		}
-	//	}
-	//	
-	//	public void addCssCellClass(String cssCellClass) {
-	//		if(this.cssCellClass == null) {
-	//			this.cssCellClass = new StringBuilder();
-	//		} else {
-	//			this.cssCellClass.append(CLASS_SEPARATOR);
-	//		}
-	//		this.cssCellClass.append(cssCellClass);
-	//	}
-	//
-	//	public void addCssCellStyle(String cssCellStyle) {
-	//		if(this.cssCellStyle == null) {
-	//			this.cssCellStyle = new StringBuilder();
-	//		} else {
-	//			this.cssCellStyle.append(STYLE_SEPARATOR);
-	//		}
-	//		this.cssCellStyle.append(cssCellStyle);
-	//	}
-
 	public Set<String> getEnabledDisplayTypes() {
 		return enabledDisplayTypes;
 	}
